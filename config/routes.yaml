@@ -3,3 +3,58 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+
+product_index:
+    path: /products
+    controller: App\Controller\ProductController::index
+
+product_show:
+    path: /product/{id}
+    controller: App\Controller\ProductController::show
+    requirements:
+        id: \d+
+
+product_new:
+    path: /product/new
+    controller: App\Controller\ProductController::new
+
+product_edit:
+    path: /product/{id}/edit
+    controller: App\Controller\ProductController::edit
+    requirements:
+        id: \d+
+
+product_delete:
+    path: /product/{id}/delete
+    controller: App\Controller\ProductController::delete
+    methods: [DELETE]
+    requirements:
+        id: \d+
+
+image_index:
+    path: /images
+    controller: App\Controller\ImageController::index
+
+image_show:
+    path: /image/{id}
+    controller: App\Controller\ImageController::show
+    requirements:
+        id: \d+
+
+image_new:
+    path: /image/new
+    controller: App\Controller\ImageController::new
+
+image_edit:
+    path: /image/{id}/edit
+    controller: App\Controller\ImageController::edit
+    requirements:
+        id: \d+
+
+image_delete:
+    path: /image/{id}/delete
+    controller: App\Controller\ImageController::delete
+    methods: [DELETE]
+    requirements:
+        id: \d+
