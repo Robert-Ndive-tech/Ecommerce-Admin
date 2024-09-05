@@ -1,47 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Crafts index{% endblock %}
+{% block title %}Crafts Index{% endblock %}
 
 {% block body %}
-    <h1>Crafts index</h1>
+    <div class="container mt-5">
+        <h1 class="mb-4">Crafts Index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>CreatedAt</th>
-                <th>Picture</th>
-                <th>Video</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for craft in crafts %}
-            <tr>
-                <td>{{ craft.id }}</td>
-                <td>{{ craft.title }}</td>
-                <td>{{ craft.description }}</td>
-                <td>{{ craft.createdAt ? craft.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td><img src="{{ asset('uploads/pictures/' ~ craft.picture) }}" alt="{{ craft.title }}" class="img-fluid"></td>
-                <td>
-                <video controls>
-        <source src="{{ asset('uploads/videos/' ~ craft.video) }}" type="video/mp4">
-        Your browser does not support the video tag.
-        </video></td>
-                <td>
-                    <a href="{{ path('app_crafts_show', {'id': craft.id}) }}">show</a>
-                    <a href="{{ path('app_crafts_edit', {'id': craft.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <!-- Responsive Table -->
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered table-striped custom-table">
+                <thead class="table-dark">
+                    <tr>
+                        <th class="text-center">Id</th>
+                        <th class="text-center">Title</th>
+                        <th class="text-center">Description</th>
+                        <th class="text-center">Created At</th>
+                        <th class="text-center">Picture</th>
+                        <th class="text-center">Video</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for craft in crafts %}
+                    <tr>
+                        <td class="text-center align-middle">{{ craft.id }}</td>
+                        <td class="text-center align-middle">{{ craft.title }}</td>
+                        <td class="text-center align-middle">{{ craft.description }}</td>
+                        <td class="text-center align-middle">{{ craft.createdAt ? craft.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                        <td class="text-center align-middle">
+                            <img src="{{ asset('uploads/pictures/' ~ craft.picture) }}" alt="{{ craft.title }}" class="img-fluid" style="max-width: 100px; height: 80px;">
+                        </td>
+                        <td class="text-center align-middle">
+                            <video class="img-fluid" controls style="max-width: 100px; height: 80px;">
+                                <source src="{{ asset('uploads/videos/' ~ craft.video) }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </td>
+                        <td class="text-center align-middle">
+                            <a href="{{ path('app_crafts_show', {'id': craft.id}) }}" class="btn btn-primary btn-sm">Show</a>
+                            <a href="{{ path('app_crafts_edit', {'id': craft.id}) }}" class="btn btn-secondary btn-sm">Edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7" class="text-center">No records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
-    <a href="{{ path('app_crafts_new') }}">Create new</a>
+        <!-- Create new button -->
+        <div class="mt-3">
+            <a href="{{ path('app_crafts_new') }}" class="btn btn-success">Create New</a>
+        </div>
+    </div>
 {% endblock %}

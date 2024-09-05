@@ -16,6 +16,14 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 #[Route('/crafts')]
 class CraftsController extends AbstractController
 {
+    private $slugger;
+
+    public function __construct(SluggerInterface $slugger)
+    {
+        $this->slugger = $slugger;
+    }
+
+
     #[Route('/', name: 'app_crafts_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
@@ -40,7 +48,7 @@ class CraftsController extends AbstractController
 $pictureFile = $form->get('picture')->getData();
 if ($pictureFile) {
     $originalFilename = pathinfo($pictureFile->getClientOriginalName(), PATHINFO_FILENAME);
-    $safeFilename = $slugger->slug($originalFilename);
+    $safeFilename = $this->slugger->slug($originalFilename);
     $newFilename = $safeFilename . '-' . uniqid() . '.' . $pictureFile->guessExtension();
 
     try {
@@ -58,7 +66,7 @@ if ($pictureFile) {
 $videoFile = $form->get('video')->getData();
         if ($videoFile) {
             $originalFilename = pathinfo($videoFile->getClientOriginalName(), PATHINFO_FILENAME);
-            $safeFilename = $slugger->slug($originalFilename);
+            $safeFilename = $this->slugger->slug($originalFilename);
             $newFilename = $safeFilename . '-' . uniqid() . '.' . $videoFile->guessExtension();
 
             try {

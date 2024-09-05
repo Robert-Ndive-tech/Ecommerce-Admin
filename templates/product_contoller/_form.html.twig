@@ -1,4 +1,19 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_start(form, {'attr': {'class': 'row g-3'}}) }}
+
+    <!-- Loop through each form field dynamically -->
+    {% for field in form %}
+        <div class="col-md-6">
+            <div class="form-floating">
+                {{ form_widget(field, {'attr': {'class': 'form-control', 'placeholder': field.vars.label}}) }}
+                {{ form_label(field, null, {'attr': {'class': 'form-label'}}) }}
+                {{ form_errors(field) }}
+            </div>
+        </div>
+    {% endfor %}
+
+    <!-- Submit button -->
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary w-100">{{ button_label|default('Save') }}</button>
+    </div>
+
 {{ form_end(form) }}
