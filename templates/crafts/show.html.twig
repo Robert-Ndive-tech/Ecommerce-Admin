@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crafts{% endblock %}
+
+{% block body %}
+    <h1>Crafts</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ craft.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ craft.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ craft.description }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ craft.createdAt ? craft.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Picture</th>
+                <td>{{ craft.picture }}</td>
+            </tr>
+            <tr>
+                <th>Video</th>
+                <td>{{ craft.video }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_crafts_index') }}">back to list</a>
+
+    <a href="{{ path('app_crafts_edit', {'id': craft.id}) }}">edit</a>
+
+    {{ include('crafts/_delete_form.html.twig') }}
+{% endblock %}

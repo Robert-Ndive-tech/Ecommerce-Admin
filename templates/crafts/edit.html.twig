@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Crafts{% endblock %}
+
+{% block body %}
+    <h1>Edit Crafts</h1>
+
+    {{ include('crafts/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_crafts_index') }}">back to list</a>
+
+    {{ include('crafts/_delete_form.html.twig') }}
+{% endblock %}

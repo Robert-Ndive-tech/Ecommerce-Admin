@@ -30,4 +30,11 @@
 #php bin/console doctrine:migrations:migrate
 #php bin/console cache:clear  
 #php bin/console doctrine:cache:clear-metadata 
+#to Drop a database schema
+#php bin/console doctrine:schema:drop --force
+#php bin/console doctrine:schema:update --force
+#To re-clear the cache when ever you recreate a  new database 
+#You  use composer require symfony/twig-bundle
+
+
  

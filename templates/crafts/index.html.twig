@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crafts index{% endblock %}
+
+{% block body %}
+    <h1>Crafts index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>CreatedAt</th>
+                <th>Picture</th>
+                <th>Video</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for craft in crafts %}
+            <tr>
+                <td>{{ craft.id }}</td>
+                <td>{{ craft.title }}</td>
+                <td>{{ craft.description }}</td>
+                <td>{{ craft.createdAt ? craft.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td><img src="{{ asset('uploads/pictures/' ~ craft.picture) }}" alt="{{ craft.title }}" class="img-fluid"></td>
+                <td>
+                <video controls>
+        <source src="{{ asset('uploads/videos/' ~ craft.video) }}" type="video/mp4">
+        Your browser does not support the video tag.
+        </video></td>
+                <td>
+                    <a href="{{ path('app_crafts_show', {'id': craft.id}) }}">show</a>
+                    <a href="{{ path('app_crafts_edit', {'id': craft.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_crafts_new') }}">Create new</a>
+{% endblock %}
