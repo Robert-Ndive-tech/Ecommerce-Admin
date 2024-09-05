@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create new Image{% endblock %}
+
+{% block body %}
+    <h1>Create new Image</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Image directory</th>
+                <th>Alternative Text</th> 
+            </tr>
+        </thead>
+        <tbody>
+            {% for image in image %}
+            <tr>
+<td>{{ image.file}}</td>
+<td>{{ image.altText }}</td>
+</tr>
+{% else %}
+<tr>
+    <td colspan="4">No records found</td>
+</tr>
+</tbody>
+{% endfor %}    </table>
+       
+        <button class="btn">{{ button_label|default('Save') }}</button>
+   
+
+    <a href="{{ path('image_index') }}">back to list</a>
+{% endblock %}
