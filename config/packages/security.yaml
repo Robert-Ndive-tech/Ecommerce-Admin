@@ -14,9 +14,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            lazy: true
-           # provider: users_in_memory
-            anonymous: lazy
+            lazy: true  # Use lazy to allow anonymous access
             provider: app_user_provider
             form_login:
                 login_path: app_login
@@ -26,14 +24,18 @@ security:
             logout:
                 path: app_logout
                 target: app_homepage
+            custom_authenticator: App\Security\AppCustomAuthenticator
 
-
-    encoders:
-        App\Entity\Account:
-            algorithm: auto 
-
-
-
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
+                path: /
+                # by default, the feature is enabled by checking a checkbox in the
+                # login form, uncomment the following line to always enable it.
+                #always_remember_me: true
+         
+            
+          
 
 
             # activate different ways to authenticate
@@ -51,6 +53,8 @@ security:
 when@test:
     security:
         password_hashers:
+            App\Entity\Account:
+               algorithm: auto 
             # By default, password hashers are resource intensive and take time. This is
             # important to generate secure password hashes. In tests however, secure hashes
             # are not important, waste resources and increase test times. The following
