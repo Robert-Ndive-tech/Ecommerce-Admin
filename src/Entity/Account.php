@@ -1,15 +1,14 @@
 <?php
 
 namespace App\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 #[ORM\Entity()]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
-class Account implements UserInterface
+class Account implements UserInterface,PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -23,6 +22,14 @@ class Account implements UserInterface
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank]
+  /**
+     * @Assert\NotBlank(message="Please enter a password")
+     * @Assert\Length(
+     *     min=6,
+     *     minMessage="Your password should be at least {{ limit }} characters",
+     *     max=4096
+     * )
+     */
     private $password;
 
     #[ORM\Column(type: 'string', length: 255)]
