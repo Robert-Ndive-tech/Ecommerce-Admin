@@ -35,6 +35,7 @@
 #php bin/console doctrine:schema:update --force
 #To re-clear the cache when ever you recreate a  new database 
 #You  use composer require symfony/twig-bundle
+#composer require symfonycasts/verify-email-bundle 
 
 
- 
+ ye
