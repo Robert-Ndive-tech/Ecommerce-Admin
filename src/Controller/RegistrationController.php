@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use App\Repository\AccountRepository;
 
 class RegistrationController extends AbstractController
 {
@@ -92,4 +92,25 @@ class RegistrationController extends AbstractController
 
         return $this->redirectToRoute('app_register');
     }
+
+//MY ADDED FUTIONALITIES
+#[Route('/', name: 'app_accounts_index', methods: ['GET'])]
+    public function index(AccountRepository $Accounts): Response
+    {
+        return $this->render('registration/index.html.twig', [
+            'Accounts' => $Accounts->findAll(),
+        ]);
+    }
+
+    // #[Route('/{id}', name: 'app_accounts_show', methods: ['GET'])]
+    // public function show(Account $Account): Response
+    // {
+    //     return $this->render('registration/show.html.twig', [
+    //         'Accounts' => $Account,
+    //     ]);
+    // }
+
+ 
 }
+
+    

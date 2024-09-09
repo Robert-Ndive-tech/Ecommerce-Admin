@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registerd Accounts Index{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="mb-4">Registered Accounts</h1>
+
+        <!-- Responsive Table -->
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for Account in Accounts %}
+                    <tr>
+                        <td>{{ Account.name }}</td>
+                        <td>{{ Account.email }}</td>
+                        <td>
+                            <a href="{{ path('product_show', {'id': Account.id}) }}" class="btn btn-info btn-sm">Show</a>
+                            <a href="{{ path('product_edit', {'id': Account.id}) }}" class="btn btn-warning btn-sm">Edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4" class="text-center">No records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

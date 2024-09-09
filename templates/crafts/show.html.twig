@@ -3,7 +3,7 @@
 {% block title %}Crafts{% endblock %}
 
 {% block body %}
-    <h1>Crafts</h1>
+    <h1 >Crafts</h1>
 
     <table class="table">
         <tbody>
@@ -25,11 +25,14 @@
             </tr>
             <tr>
                 <th>Picture</th>
-                <td>{{ craft.picture }}</td>
+                <td>   <img src="{{ asset('uploads/pictures/' ~ craft.picture) }}" alt="{{ craft.title }}" class="img-fluid" style="max-width: 100px; height: 80px;"></td>
             </tr>
             <tr>
                 <th>Video</th>
-                <td>{{ craft.video }}</td>
+                <td> <video class="img-fluid" controls style="max-width: 100px; height: 80px;">
+                                <source src="{{ asset('uploads/videos/' ~ craft.video) }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video></td>
             </tr>
         </tbody>
     </table>
