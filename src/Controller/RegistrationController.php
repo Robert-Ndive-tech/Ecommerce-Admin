@@ -103,10 +103,10 @@ class RegistrationController extends AbstractController
     }
 
     // #[Route('/{id}', name: 'app_accounts_show', methods: ['GET'])]
-    // public function show(Account $Account): Response
+    // public function show(Account $account): Response
     // {
     //     return $this->render('registration/show.html.twig', [
-    //         'Accounts' => $Account,
+    //         'account' => $account,
     //     ]);
     // }
 
